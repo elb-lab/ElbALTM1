@@ -1,0 +1,88 @@
+Configuration	ElbAltm
+STM32CubeMX 	6.13.0
+Date	02/12/2025
+MCU	STM32G0B1KETxN
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+I2C2	I2C	I2C2_SCL	PA7
+I2C2	I2C	I2C2_SDA	PA6
+SPI2	Full-Duplex Master	SPI2_MISO	PA3
+SPI2	Full-Duplex Master	SPI2_MOSI	PA4
+SPI2	Full-Duplex Master	SPI2_SCK	PA0
+SYS	Serial Wire	SYS_SWCLK	PA14-BOOT0
+SYS	Serial Wire	SYS_SWDIO	PA13
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+SYS	Dead Battery Signals disabled	SYS_VS_DBSignals	VP_SYS_VS_DBSignals
+USB_DRD_FS	Device_Only_FS	USB_DM	PA11 [PA9]
+USB_DRD_FS	Device_Only_FS	USB_DP	PA12 [PA10]
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+7	PA0	SPI2_SCK	ALTM_SCLK
+8	PA1	GPIO_Output	ALTM_CSEL
+10	PA3	SPI2_MISO	ALTM_MISO
+11	PA4	SPI2_MOSI	ALTM_MOSI
+13	PA6	I2C2_SDA	
+14	PA7	I2C2_SCL	
+16	PB1	GPIO_Output	LED
+22	PA11 [PA9]	USB_DM	
+23	PA12 [PA10]	USB_DP	
+24	PA13	SYS_SWDIO	SWDIO
+25	PA14-BOOT0	SYS_SWCLK	SWCLK
+PERIPHERALS	MODES	FUNCTIONS	PINS
+I2C2	I2C	I2C2_SCL	PA7
+I2C2	I2C	I2C2_SDA	PA6
+SPI2	Full-Duplex Master	SPI2_MISO	PA3
+SPI2	Full-Duplex Master	SPI2_MOSI	PA4
+SPI2	Full-Duplex Master	SPI2_SCK	PA0
+SYS	Serial Wire	SYS_SWCLK	PA14-BOOT0
+SYS	Serial Wire	SYS_SWDIO	PA13
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+SYS	Dead Battery Signals disabled	SYS_VS_DBSignals	VP_SYS_VS_DBSignals
+USB_DRD_FS	Device_Only_FS	USB_DM	PA11 [PA9]
+USB_DRD_FS	Device_Only_FS	USB_DP	PA12 [PA10]
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+7	PA0	SPI2_SCK	ALTM_SCLK
+8	PA1	GPIO_Output	ALTM_CSEL
+10	PA3	SPI2_MISO	ALTM_MISO
+11	PA4	SPI2_MOSI	ALTM_MOSI
+13	PA6	I2C2_SDA	
+14	PA7	I2C2_SCL	
+16	PB1	GPIO_Output	LED
+22	PA11 [PA9]	USB_DM	
+23	PA12 [PA10]	USB_DP	
+24	PA13	SYS_SWDIO	SWDIO
+25	PA14-BOOT0	SYS_SWCLK	SWCLK
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : ElbAltm
+Project Folder : C:\dirpers\Progetti x MCU\ElbALTM\fw_stm32\ElbAltm
+Toolchain / IDE : CMake
+Firmware Package Name and Version : STM32Cube FW_G0 V1.6.2
+
+
+Code Generation Settings : 
+STM32Cube MCU packages and embedded software packs : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : Yes
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : 
+
+
+
+
+

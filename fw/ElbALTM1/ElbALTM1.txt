@@ -1,0 +1,106 @@
+Configuration	ElbALTM1
+STM32CubeMX 	6.14.1
+Date	07/30/2025
+MCU	STM32C071FBPx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+DEBUG	Serial Wire	DEBUG_SWCLK	PA14-BOOT0
+DEBUG	Serial Wire	DEBUG_SWDIO	PA13
+I2C1	I2C	I2C1_SCL	PB7
+I2C1	I2C	I2C1_SDA	PC14-OSCX_IN(PC14)
+I2C2	I2C	I2C2_SCL	PA7
+I2C2	I2C	I2C2_SDA	PB4
+SPI1	Full-Duplex Master	SPI1_MISO	PA6
+SPI1	Full-Duplex Master	SPI1_MOSI	PA2
+SPI1	Full-Duplex Master	SPI1_SCK	PA1
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+TIM3	Internal Clock	TIM3_VS_ClockSourceINT	VP_TIM3_VS_ClockSourceINT
+TIM3	PWM Generation CH3	TIM3_CH3	PC15-OSCX_OUT(PC15)
+USB	Device_Only	USB_DM	PA11 [PA9]
+USB	Device_Only	USB_DP	PA12 [PA10]
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+1	PB7	I2C1_SCL	SCL1
+2	PC14-OSCX_IN(PC14)	I2C1_SDA	SDA1
+3	PC15-OSCX_OUT(PC15)	TIM3_CH3	BEEP
+7	PA0	GPIO_Input	BUTT2
+8	PA1	SPI1_SCK	SCLK
+9	PA2	SPI1_MOSI	MOSI
+10	PA3	GPIO_Input	STBATT
+11	PA4	GPIO_Input	BUTT3
+12	PA5	GPIO_Input	BUTT1
+13	PA6	SPI1_MISO	MISO
+14	PA7	I2C2_SCL	SCL2
+15	PA8	GPIO_Output	CSEL
+16	PA11 [PA9]	USB_DM	
+17	PA12 [PA10]	USB_DP	
+18	PA13	DEBUG_SWDIO	SWDIO
+19	PA14-BOOT0	DEBUG_SWCLK	SWCLK
+20	PB4	I2C2_SDA	SDA2
+PERIPHERALS	MODES	FUNCTIONS	PINS
+DEBUG	Serial Wire	DEBUG_SWCLK	PA14-BOOT0
+DEBUG	Serial Wire	DEBUG_SWDIO	PA13
+I2C1	I2C	I2C1_SCL	PB7
+I2C1	I2C	I2C1_SDA	PC14-OSCX_IN(PC14)
+I2C2	I2C	I2C2_SCL	PA7
+I2C2	I2C	I2C2_SDA	PB4
+SPI1	Full-Duplex Master	SPI1_MISO	PA6
+SPI1	Full-Duplex Master	SPI1_MOSI	PA2
+SPI1	Full-Duplex Master	SPI1_SCK	PA1
+SYS	SysTick	SYS_VS_Systick	VP_SYS_VS_Systick
+TIM3	Internal Clock	TIM3_VS_ClockSourceINT	VP_TIM3_VS_ClockSourceINT
+TIM3	PWM Generation CH3	TIM3_CH3	PC15-OSCX_OUT(PC15)
+USB	Device_Only	USB_DM	PA11 [PA9]
+USB	Device_Only	USB_DP	PA12 [PA10]
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+1	PB7	I2C1_SCL	SCL1
+2	PC14-OSCX_IN(PC14)	I2C1_SDA	SDA1
+3	PC15-OSCX_OUT(PC15)	TIM3_CH3	BEEP
+7	PA0	GPIO_Input	BUTT2
+8	PA1	SPI1_SCK	SCLK
+9	PA2	SPI1_MOSI	MOSI
+10	PA3	GPIO_Input	STBATT
+11	PA4	GPIO_Input	BUTT3
+12	PA5	GPIO_Input	BUTT1
+13	PA6	SPI1_MISO	MISO
+14	PA7	I2C2_SCL	SCL2
+15	PA8	GPIO_Output	CSEL
+16	PA11 [PA9]	USB_DM	
+17	PA12 [PA10]	USB_DP	
+18	PA13	DEBUG_SWDIO	SWDIO
+19	PA14-BOOT0	DEBUG_SWCLK	SWCLK
+20	PB4	I2C2_SDA	SDA2
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : ElbALTM1
+Project Folder : C:\dirpers\Progetti x MCU\ElbALTM\fw\ElbALTM1
+Toolchain / IDE : CMake
+Firmware Package Name and Version : STM32Cube FW_C0 V1.4.0
+
+
+Code Generation Settings : 
+STM32Cube MCU packages and embedded software packs : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : Yes
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : 
+
+
+
+
+

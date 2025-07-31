@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//App/inc/ch32v_mcu.h=GBK
+encoding//App/inc/scp.h=GBK
+encoding//App/rel/rel.h=GBK
+encoding//App/src/atcmd.c=GBK
+encoding//App/src/led.c=GBK
+encoding//App/src/ms5611.c=GBK
+encoding//App/src/scp.c=GBK
+encoding//App/src/usr.c=GBK
+encoding//Core/core_riscv.h=GBK
+encoding//Peripheral/inc/ch32v00x_gpio.h=GBK
+encoding//Peripheral/inc/ch32v00x_i2c.h=GBK
+encoding//Peripheral/inc/ch32v00x_rcc.h=GBK
+encoding//Peripheral/inc/ch32v00x_spi.h=GBK
+encoding//Peripheral/src/ch32v00x_i2c.c=GBK
+encoding//Peripheral/src/ch32v00x_spi.c=GBK
+encoding//User/main.c=GBK

@@ -1,0 +1,5 @@
+C:/dirpers/Progetti x MCU/ElbALTM/fw_stm32/ElbAltm/build/Debug/CMakeFiles/ElbAltm.dir
+C:/dirpers/Progetti x MCU/ElbALTM/fw_stm32/ElbAltm/build/Debug/CMakeFiles/edit_cache.dir
+C:/dirpers/Progetti x MCU/ElbALTM/fw_stm32/ElbAltm/build/Debug/CMakeFiles/rebuild_cache.dir
+C:/dirpers/Progetti x MCU/ElbALTM/fw_stm32/ElbAltm/build/Debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+C:/dirpers/Progetti x MCU/ElbALTM/fw_stm32/ElbAltm/build/Debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
