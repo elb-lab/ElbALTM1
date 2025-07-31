@@ -16,6 +16,7 @@
 #include "prt.h"
 #include "draw.h"
 #include "font.h"
+#include "beep.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -46,6 +47,7 @@ void usr_setup(void)
   MS5611_Init();
   MPU_Init();
 	OLED_Init();
+	BEEP_Init();
 }
 
 /*******************************************************************************
@@ -62,9 +64,10 @@ void usr_main(void)
 
 	OLED_Fill(1); // Clear the OLED display
 	OLED_DisplayRefresh(); // Refresh the display to show the cleared screen
+	beep(1,50,0); // Beep once with a short sound
 	wait(1000); // Wait for 1 second
 
-	PRT_SetFont(lucidaConsole_10ptFontInfo);
+	PRT_SetFont(mSUIGothic_48ptFontInfo);
 
 	while(1)
 	{
@@ -75,15 +78,17 @@ void usr_main(void)
 
 			OLED_Fill(0); // Clear the OLED display
 
-			PRT_PutString((u8*)"ATM: ", LEFT, 0, 0);
-			sprintf((char*)s, "Pres: %ld Pa", atm_data.pres);
-			PRT_PutString(s, LEFT, 0, 10);
-			sprintf((char*)s, "Alt: %ld m", atm_data.altm);
-			PRT_PutString(s, LEFT, 0, 20);
-			sprintf((char*)s, "Temp: %ld C", atm_data.temp);
-			PRT_PutString(s, LEFT, 0, 30);
+			// PRT_PutString((u8*)"ATM: ", LEFT, 0, 0);
+			// sprintf((char*)s, "Pres: %ld Pa", atm_data.pres);
+			// PRT_PutString(s, LEFT, 0, 10);
+			// sprintf((char*)s, "Alt: %ld m", atm_data.altm);
+			// PRT_PutString(s, LEFT, 0, 20);
+			// sprintf((char*)s, "Temp: %ld C", atm_data.temp);
+			// PRT_PutString(s, LEFT, 0, 30);
 
-			// DRAW_FillRect(10, 10, 30, 30, 1); // Draw a filled rectangle
+			//sprintf((char*)s, "%ld.%01ld", atm_data.altm/100, (atm_data.altm % 100) / 10);
+			sprintf((char*)s, "%ld", atm_data.altm/100);
+			PRT_PutString((u8*)s, CENTER, 63, 10);
 
 			OLED_DisplayRefresh(); // Refresh the display to show the updated data
 		}

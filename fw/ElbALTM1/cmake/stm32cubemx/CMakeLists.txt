@@ -34,6 +34,7 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Core/Src/syscalls.c
     ${CMAKE_SOURCE_DIR}/startup_stm32c071xx.s
     # USER CODE BEGIN
+    ${CMAKE_SOURCE_DIR}/App/src/beep.c
     ${CMAKE_SOURCE_DIR}/App/src/draw.c
     ${CMAKE_SOURCE_DIR}/App/src/font.c
     ${CMAKE_SOURCE_DIR}/App/src/irq.c

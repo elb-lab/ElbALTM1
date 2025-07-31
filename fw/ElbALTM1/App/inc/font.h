@@ -23,5 +23,9 @@ extern const u8 lucidaConsole_10ptBitmaps[];
 extern const FONT_INFO lucidaConsole_10ptFontInfo;
 extern const FONT_CHAR_INFO lucidaConsole_10ptDescriptors[];
 
+// Font data for MS UI Gothic 48pt
+extern const u8 mSUIGothic_48ptBitmaps[];
+extern const FONT_INFO mSUIGothic_48ptFontInfo;
+extern const FONT_CHAR_INFO mSUIGothic_48ptDescriptors[];
 
 #endif	/* __FONT_H__ */
