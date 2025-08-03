@@ -46,8 +46,11 @@ void usr_setup(void)
 {
   MS5611_Init();
   MPU_Init();
-	OLED_Init();
 	BEEP_Init();
+
+	wait(100);
+
+	OLED_Init();
 }
 
 /*******************************************************************************
@@ -87,8 +90,12 @@ void usr_main(void)
 			// PRT_PutString(s, LEFT, 0, 30);
 
 			//sprintf((char*)s, "%ld.%01ld", atm_data.altm/100, (atm_data.altm % 100) / 10);
+
+			PRT_SetFont(mSUIGothic_48ptFontInfo);
 			sprintf((char*)s, "%ld", atm_data.altm/100);
-			PRT_PutString((u8*)s, CENTER, 63, 10);
+			PRT_PutString((u8*)s, CENTER, 63, 0);
+			PRT_SetFont(lucidaConsole_10ptFontInfo);
+			PRT_PutString((u8*)"-- metri --", CENTER, 63, 50);
 
 			OLED_DisplayRefresh(); // Refresh the display to show the updated data
 		}
