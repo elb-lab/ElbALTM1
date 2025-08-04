@@ -275,7 +275,7 @@ ms5611_stat	MS5611_ReadData(ms5611_data *data)
 	data->pres = (((s64)data->pres * SENS) / 2097152 - OFF) / 32768;
 
 	/* Calcolo Altimetrico */
-	data->altm = 13512 * (1 - pow((data->pres / 101325), 0.1903));
+	data->altm = (s32)(12700.0 * (1.0 - pow(((double)data->pres / 101325.0), 0.1903)) * 100.0);
 
 	return MS_OK;
 }

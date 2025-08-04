@@ -37,6 +37,7 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/App/src/beep.c
     ${CMAKE_SOURCE_DIR}/App/src/draw.c
     ${CMAKE_SOURCE_DIR}/App/src/font.c
+    ${CMAKE_SOURCE_DIR}/App/src/io.c
     ${CMAKE_SOURCE_DIR}/App/src/irq.c
     ${CMAKE_SOURCE_DIR}/App/src/mpu6050.c
     ${CMAKE_SOURCE_DIR}/App/src/ms5611.c
