@@ -27,21 +27,79 @@ typedef enum MENU_LIST_ {
 	MNU_PRESSURE,
 } MENU_LIST;
 
+typedef struct menu_struct_ {
+	MENU_LIST	menu, prev, next;
+	void (*func)(s16 y);
+} menu_struct;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
 ms5611_data		atm_data;
 mpu_struct		imu_data = {0};
-u8						sel = 0;
 
 /* timers */
 tmr	tmr_spy = 0;
 tmr tmr_atm = 0;
 
+menu_struct menu;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Extern function prototypes ------------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
+/**
+ * @brief Visualizzazione pagina
+ * 
+ * @param pos_x 
+ * @param s_value 
+ * @param s_title 
+ */
+static void vis_value(s16 pos_x, u32 s_value, u8 *s_title)
+{
+	u8 s[32];
+
+	PRT_SetFont(mSUIGothic_48ptFontInfo);
+	sprintf((char*)s, "%ld", s_value);
+	PRT_PutString((u8*)s, CENTER, 63 + pos_x, 0);
+	PRT_SetFont(lucidaConsole_10ptFontInfo);
+	PRT_PutString((u8*)s_title, CENTER, 63 - pos_x, 50);
+}
+
+/**
+ * @brief Visualizzazione altimetria
+ * 
+ */
+void __menu_altimeter__(s16 pos_x)
+{
+	vis_value(pos_x, atm_data.altm / 100, (u8*)"-- metri --");
+}
+
+/**
+ * @brief Visualizzazione pressione
+ * 
+ */
+void __menu_pressure__(s16 pos_x)
+{
+	vis_value(pos_x, atm_data.pres / 100, (u8*)"-- mbar --");
+}
+
+/**
+ * @brief Visualizzazione temperature
+ * 
+ */
+void __menu_temperature__(s16 pos_x)
+{
+	vis_value(pos_x, atm_data.temp / 100, (u8*)"-- Gradi C --");
+}
+
+static const menu_struct menu_list[] = {
+	/*menu,							next,							prev,							function							*/
+	{	MNU_ALTIMETER,		MNU_TEMPERATURE,	MNU_PRESSURE, 		__menu_altimeter__		},
+	{ MNU_TEMPERATURE,	MNU_PRESSURE, 		MNU_ALTIMETER, 		__menu_temperature__	},
+	{ MNU_PRESSURE,			MNU_ALTIMETER, 		MNU_TEMPERATURE,	__menu_pressure__			},
+};
 
 /*******************************************************************************
 * Function Name  : usr_setup
@@ -61,8 +119,6 @@ void usr_setup(void)
 	wait(100);
 
 	OLED_Init();
-
-	sel = 0;
 }
 
 /*******************************************************************************
@@ -76,7 +132,7 @@ void usr_setup(void)
 void usr_main(void)
 {
 	pin_stat *butt;
-	u8 s[32];
+	s16 x;
 
 	OLED_Fill(1); // Clear the OLED display
 	OLED_DisplayRefresh(); // Refresh the display to show the cleared screen
@@ -85,82 +141,38 @@ void usr_main(void)
 
 	PRT_SetFont(mSUIGothic_48ptFontInfo);
 
+	menu = menu_list[MNU_ALTIMETER];
+
 	while(1)
 	{
+		IO_Service();	
+
+		butt = IO_GetPin();
 		if (tmrTick(tmr_atm, 100))
 		{
-			IO_Service();	
 			MS5611_ReadData(&atm_data);
 			MPU_ReadData(&imu_data);
 
 			OLED_Fill(0); // Clear the OLED display
 
-			// PRT_PutString((u8*)"ATM: ", LEFT, 0, 0);
-			// sprintf((char*)s, "Pres: %ld Pa", atm_data.pres);
-			// PRT_PutString(s, LEFT, 0, 10);
-			// sprintf((char*)s, "Alt: %ld m", atm_data.altm);
-			// PRT_PutString(s, LEFT, 0, 20);
-			// sprintf((char*)s, "Temp: %ld C", atm_data.temp);
-			// PRT_PutString(s, LEFT, 0, 30);
-
-			//sprintf((char*)s, "%ld.%01ld", atm_data.altm/100, (atm_data.altm % 100) / 10);
-			butt = IO_GetPin();
-			switch (sel)
-			{
-				case MNU_ALTIMETER:
-					PRT_SetFont(mSUIGothic_48ptFontInfo);
-					sprintf((char*)s, "%ld", atm_data.altm/100);
-					PRT_PutString((u8*)s, CENTER, 63, 0);
-					PRT_SetFont(lucidaConsole_10ptFontInfo);
-					PRT_PutString((u8*)"-- metri --", CENTER, 63, 50);
-					if (butt[2].re == ON)
-					{
-						sel = MNU_TEMPERATURE;
-						beep(1,50,0);
-					}
-					else if (butt[0].re == ON)
-					{
-						sel = MNU_PRESSURE;
-						beep(1,50,0);
-					}
-					break;
-				case MNU_TEMPERATURE:
-					PRT_SetFont(mSUIGothic_48ptFontInfo);
-					sprintf((char*)s, "%ld", atm_data.temp/100);
-					PRT_PutString((u8*)s, CENTER, 63, 0);
-					PRT_SetFont(lucidaConsole_10ptFontInfo);
-					PRT_PutString((u8*)"-- gradi C --", CENTER, 63, 50);
-					if (butt[2].re == ON)
-					{
-						sel = MNU_PRESSURE;
-						beep(1,50,0);
-					}	
-					else if (butt[0].re == ON)
-					{
-						sel = MNU_ALTIMETER;
-						beep(1,50,0);
-					}
-					break;
-				case MNU_PRESSURE:
-					PRT_SetFont(mSUIGothic_48ptFontInfo);
-					sprintf((char*)s, "%ld", atm_data.pres/100);
-					PRT_PutString((u8*)s, CENTER, 63, 0);
-					PRT_SetFont(lucidaConsole_10ptFontInfo);
-					PRT_PutString((u8*)"-- mbar --", CENTER, 63, 50);
-					if (butt[2].re == ON)
-					{
-						sel = MNU_ALTIMETER;
-						beep(1,50,0);
-					}	
-					else if (butt[0].re == ON)
-					{
-						sel = MNU_TEMPERATURE;
-						beep(1,50,0);
-					}
-					break;
-			} /* switch */
+			menu.func(0);
 			OLED_DisplayRefresh(); // Refresh the display to show the updated data
+
+			++x;
+			if (x >= 128)
+				x = -127;
 		}
+
+		/* cambio menu */
+		if (butt[0].re)
+		{
+			menu = menu_list[menu.next];
+		}
+		else if (butt[2].re)
+		{
+			menu = menu_list[menu.prev];
+		}
+
 	} /* while(1) */
 } /* usr_main() */
 
