@@ -114,6 +114,8 @@ u16	PRT_PutString(u8 *s, ALLIGN mode, u16 x, u16 y)
 	{
 		case CENTER:
 			sum >>= 1;
+			next_x = x - sum;
+			break;
 			/* fall through */
 			
 		case RIGHT:

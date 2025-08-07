@@ -38,10 +38,12 @@ typedef struct menu_struct_ {
 
 ms5611_data		atm_data;
 mpu_struct		imu_data = {0};
+s16						x0 = 0;
 
 /* timers */
 tmr	tmr_spy = 0;
 tmr tmr_atm = 0;
+tmr	tmr_anim;
 
 menu_struct menu;
 
@@ -143,6 +145,10 @@ void usr_main(void)
 
 	menu = menu_list[MNU_ALTIMETER];
 
+	tmr_anim = 0;
+
+	x0 = -63;
+
 	while(1)
 	{
 		IO_Service();	
@@ -155,12 +161,15 @@ void usr_main(void)
 
 			OLED_Fill(0); // Clear the OLED display
 
-			menu.func(0);
+			menu.func(x);
 			OLED_DisplayRefresh(); // Refresh the display to show the updated data
+		}
 
+		if (tmrTick(tmr_anim, 3))
+		{
 			++x;
 			if (x >= 128)
-				x = -127;
+				x = -128;
 		}
 
 		/* cambio menu */

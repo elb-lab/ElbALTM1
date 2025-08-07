@@ -196,6 +196,9 @@ void OLED_Pixel(u8 x, u8 y, u8 color)
 	u8	*c;
 	u8	s;
 
+	if (x >= OLED_ORIZ_RES || y >= OLED_VERT_RES)
+		return;
+
 	c = &fb[x + (y / 8) * OLED_ORIZ_RES];
 	s = 1 << (y % 8);
 
