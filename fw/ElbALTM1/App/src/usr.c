@@ -154,10 +154,10 @@ void usr_main(void)
 		IO_Service();	
 
 		butt = IO_GetPin();
-		if (tmrTick(tmr_atm, 100))
+		if (tmrTick(tmr_atm, 50))
 		{
 			MS5611_ReadData(&atm_data);
-			MPU_ReadData(&imu_data);
+			//MPU_ReadData(&imu_data);
 
 			OLED_Fill(0); // Clear the OLED display
 
@@ -165,11 +165,18 @@ void usr_main(void)
 			OLED_DisplayRefresh(); // Refresh the display to show the updated data
 		}
 
-		if (tmrTick(tmr_anim, 3))
+		if (tmrTick(tmr_anim, 1))
 		{
-			++x;
+			x += 16;
 			if (x >= 128)
+			{
 				x = -128;
+				menu = menu_list[menu.next];
+			}
+			else if (x == 0)
+			{
+				tmr_anim = 7000;
+			}
 		}
 
 		/* cambio menu */
