@@ -32,6 +32,11 @@ typedef struct menu_struct_ {
 	void (*func)(s16 y);
 } menu_struct;
 
+typedef enum MENU_SKROLL_DIR_ {
+	SKROLL_RIGHT = 0,
+	SKROLL_LEFT,
+} MENU_SKROLL_DIR;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -41,7 +46,7 @@ mpu_struct		imu_data = {0};
 s16						x0 = 0;
 
 /* timers */
-tmr	tmr_spy = 0;
+tmr	tmr_dsy = 0;
 tmr tmr_atm = 0;
 tmr	tmr_anim;
 
@@ -75,7 +80,7 @@ static void vis_value(s16 pos_x, u32 s_value, u8 *s_title)
  */
 void __menu_altimeter__(s16 pos_x)
 {
-	vis_value(pos_x, atm_data.altm / 100, (u8*)"-- metri --");
+	vis_value(pos_x, atm_data.altm / 100, (u8*)"-- Metri --");
 }
 
 /**
@@ -135,6 +140,7 @@ void usr_main(void)
 {
 	pin_stat *butt;
 	s16 x;
+	MENU_SKROLL_DIR dir = SKROLL_RIGHT;
 
 	OLED_Fill(1); // Clear the OLED display
 	OLED_DisplayRefresh(); // Refresh the display to show the cleared screen
@@ -154,39 +160,59 @@ void usr_main(void)
 		IO_Service();	
 
 		butt = IO_GetPin();
-		if (tmrTick(tmr_atm, 50))
+		if (tmrTick(tmr_atm, 100))
 		{
 			MS5611_ReadData(&atm_data);
 			//MPU_ReadData(&imu_data);
-
-			OLED_Fill(0); // Clear the OLED display
-
-			menu.func(x);
-			OLED_DisplayRefresh(); // Refresh the display to show the updated data
 		}
 
-		if (tmrTick(tmr_anim, 1))
+		if (tmrTick(tmr_anim, 5))
 		{
-			x += 16;
-			if (x >= 128)
+			if (dir == SKROLL_RIGHT)
 			{
-				x = -128;
-				menu = menu_list[menu.next];
-			}
-			else if (x == 0)
+				x += 16;
+				if (x >= 128)
+				{
+					x = -128;
+					menu = menu_list[menu.next];
+				}
+				else if (x == 0)
+				{
+					tmr_anim = 7000;
+				}
+			} // SKROLL_RIGHT
+			else
 			{
-				tmr_anim = 7000;
+				x -= 16;
+				if (x <= -128)
+				{
+					x = 128;
+					menu = menu_list[menu.prev];
+				}
+				else if (x == 0)
+				{
+					tmr_anim = 7000;
+				}
 			}
 		}
 
 		/* cambio menu */
 		if (butt[0].re)
 		{
-			menu = menu_list[menu.next];
+			tmr_anim = 10;
+			dir = SKROLL_LEFT;
 		}
 		else if (butt[2].re)
 		{
-			menu = menu_list[menu.prev];
+			tmr_anim = 10;
+			dir = SKROLL_RIGHT;
+		}
+
+		if (tmrTick(tmr_dsy, 50))
+		{
+			OLED_Fill(0); // Clear the OLED display
+			menu.func(x);
+			OLED_DisplayRefresh(); // Refresh the display to show the updated data
 		}
 
 	} /* while(1) */
