@@ -22,9 +22,10 @@
 /* Private typedef -----------------------------------------------------------*/
 
 typedef enum MENU_LIST_ {
-	MNU_ALTIMETER = 0,
-	MNU_TEMPERATURE,
-	MNU_PRESSURE,
+	MENU_NULL = 0,
+	MENU_ALTIMETER,
+	MENU_TEMPERATURE,
+	MENU_PRESSURE,
 } MENU_LIST;
 
 typedef struct menu_struct_ {
@@ -75,6 +76,16 @@ static void vis_value(s16 pos_x, u32 s_value, u8 *s_title)
 }
 
 /**
+ * @brief Visualizzazione vuota
+ * 
+ */
+void __menu_null__(s16 pos_x)
+{
+	UNUSED(pos_x);
+	__NOP();
+}
+
+/**
  * @brief Visualizzazione altimetria
  * 
  */
@@ -103,9 +114,10 @@ void __menu_temperature__(s16 pos_x)
 
 static const menu_struct menu_list[] = {
 	/*menu,							next,							prev,							function							*/
-	{	MNU_ALTIMETER,		MNU_TEMPERATURE,	MNU_PRESSURE, 		__menu_altimeter__		},
-	{ MNU_TEMPERATURE,	MNU_PRESSURE, 		MNU_ALTIMETER, 		__menu_temperature__	},
-	{ MNU_PRESSURE,			MNU_ALTIMETER, 		MNU_TEMPERATURE,	__menu_pressure__			},
+	{	MENU_NULL,				MENU_ALTIMETER,		MENU_ALTIMETER, 	__menu_null__					},
+	{	MENU_ALTIMETER,		MENU_TEMPERATURE,	MENU_PRESSURE, 		__menu_altimeter__		},
+	{ MENU_TEMPERATURE,	MENU_PRESSURE, 		MENU_ALTIMETER,		__menu_temperature__	},
+	{ MENU_PRESSURE,		MENU_ALTIMETER,		MENU_TEMPERATURE,	__menu_pressure__			},
 };
 
 /*******************************************************************************
@@ -142,14 +154,20 @@ void usr_main(void)
 	s16 x;
 	MENU_SKROLL_DIR dir = SKROLL_RIGHT;
 
-	OLED_Fill(1); // Clear the OLED display
+	PRT_SetFont(lucidaConsole_10ptFontInfo);
+	OLED_Fill(0); // Clear the OLED display
+	PRT_PutString((u8*)"ElbALMT", CENTER, 63, 0);
+	PRT_PutString((u8*)"v1.0", CENTER, 63, 15);
+	PRT_PutString((u8*)"by", CENTER, 63, 30);
+	PRT_PutString((u8*)"FrankOz", CENTER, 63, 45);
+
 	OLED_DisplayRefresh(); // Refresh the display to show the cleared screen
 	beep(1,50,0); // Beep once with a short sound
-	wait(1000); // Wait for 1 second
+	wait(2000); // Wait for 1 second
 
 	PRT_SetFont(mSUIGothic_48ptFontInfo);
 
-	menu = menu_list[MNU_ALTIMETER];
+	menu = menu_list[MENU_NULL];
 
 	tmr_anim = 0;
 
