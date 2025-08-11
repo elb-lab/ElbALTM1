@@ -254,6 +254,22 @@ void OLED_Init(void)
 	}
 } /* eprInit */
 
+/**
+ * @brief Turn off the OLED display
+ * 
+ */
+void OLED_Off(void)
+{
+	OLED_WrCmd(0xAE); // Display OFF
+}
 
+/**
+ * @brief Turn on the OLED display
+ * 
+ */
+void OLED_On(void)
+{
+	OLED_WrCmd(0xAF); // Display ON
+}
 
 /**** END OF FILE ****/

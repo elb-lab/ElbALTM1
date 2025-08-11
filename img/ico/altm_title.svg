@@ -56,6 +56,19 @@
   <defs
      id="defs1" />
   <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Background"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.2;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect17"
+       width="33.866665"
+       height="16.933332"
+       x="0"
+       y="0" />
+  </g>
+  <g
      inkscape:label="Mountain"
      inkscape:groupmode="layer"
      id="layer1"
@@ -71,10 +84,6 @@
        id="path15"
        transform="scale(0.26458333)" />
   </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="Background" />
   <g
      inkscape:groupmode="layer"
      id="layer2"

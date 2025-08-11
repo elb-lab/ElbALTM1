@@ -24,6 +24,8 @@ void	OLED_DisplayRefresh(void);
 void 	OLED_Fill(u8 color);
 void	OLED_Pixel(u8 x, u8 y, u8 pixel);
 void	OLED_PutImage(u8 *image, u8 x, u8 y, u8	width, u8 high);
+void	OLED_Off(void);
+void	OLED_On(void);
 
 #endif	/* __OLED_H */
 

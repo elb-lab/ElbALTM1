@@ -49,7 +49,8 @@ s16						x0 = 0;
 /* timers */
 tmr	tmr_dsy = 0;
 tmr tmr_atm = 0;
-tmr	tmr_anim;
+tmr	tmr_anim = 0;
+tmr tmr_off = 3000;
 
 menu_struct menu;
 
@@ -157,7 +158,7 @@ void usr_main(void)
 	PRT_SetFont(lucidaConsole_10ptFontInfo);
 	OLED_Fill(0); // Clear the OLED display
 	PRT_PutString((u8*)"ElbALMT", CENTER, 63, 0);
-	PRT_PutString((u8*)"v1.0", CENTER, 63, 15);
+	PRT_PutString((u8*)"v1.1", CENTER, 63, 15);
 	PRT_PutString((u8*)"by", CENTER, 63, 30);
 	PRT_PutString((u8*)"FrankOz", CENTER, 63, 45);
 
@@ -170,6 +171,7 @@ void usr_main(void)
 	menu = menu_list[MENU_NULL];
 
 	tmr_anim = 0;
+	tmr_off = 3000;
 
 	x0 = -63;
 
@@ -224,6 +226,30 @@ void usr_main(void)
 		{
 			tmr_anim = 10;
 			dir = SKROLL_RIGHT;
+		}
+		
+		/* Spegnimento */
+		if (butt[1].re)
+		{
+			tmrStart(tmr_off, 3000);
+		}
+		else if (butt[1].re)
+		{
+			tmrStop(tmr_off);
+		}
+		else if (!tmr_off)
+		{
+			OLED_Fill(0); // Clear the OLED display
+			OLED_DisplayRefresh(); // Refresh the display to show the cleared screen
+			OLED_Off(); // Turn off the OLED display
+			do {
+				IO_Service(); // Service IO to keep the system responsive
+				butt = IO_GetPin();
+			} while (butt[1].re == OFF); // Wait until the button is released
+			//OLED_On(); // Turn the OLED display back on
+			__disable_irq(); // Disable interrupts
+			HAL_NVIC_SystemReset();	// system reset
+			while(1);	
 		}
 
 		if (tmrTick(tmr_dsy, 50))
