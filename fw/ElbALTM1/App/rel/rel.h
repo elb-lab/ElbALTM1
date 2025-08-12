@@ -26,9 +26,9 @@ typedef struct {
 /* Release Data *************/
 
 static const __attribute__ ((section(".id_data"))) release_struct	rel = {
-/* fw_name  */	"ElbALTM",
-/* hw_name  */	"MIRTILLO-PICO",
-/* rel_nr   */	"1.0",
+/* fw_name  */	"ElbALTM1",
+/* hw_name  */	"ElbALTM1",
+/* rel_nr   */	"1.2",
 /* rel_date */	DATA_COMPILE,
 /* rel_comp */	NR_COMPILE,
 /* rel_note */	"-",

@@ -10,7 +10,7 @@ extern {
 #endif /* __cplusplus */
 
 #define DATA_COMPILE "12/08/25"
-#define NR_COMPILE "250812.04"
+#define NR_COMPILE "250812.11"
 
 #ifdef __cplusplus
 }

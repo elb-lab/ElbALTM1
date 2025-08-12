@@ -18,6 +18,7 @@
 #include "font.h"
 #include "beep.h"
 #include "io.h"
+#include "rel.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -158,10 +159,10 @@ void usr_main(void)
 
 	PRT_SetFont(lucidaConsole_10ptFontInfo);
 	OLED_Fill(0); // Clear the OLED display
-	PRT_PutString((u8*)"ElbALMT", CENTER, 63, 0);
-	PRT_PutString((u8*)"v1.1", CENTER, 63, 15);
-	PRT_PutString((u8*)"by", CENTER, 63, 30);
-	PRT_PutString((u8*)"FrankOz", CENTER, 63, 45);
+	PRT_PutString((u8*)"ElbALMT1", CENTER, 63, 0);
+	PRT_PutString((u8*)rel.rel_nr, CENTER, 63, 16);
+	PRT_PutString((u8*)rel.rel_comp, CENTER, 63, 32);
+	PRT_PutString((u8*)"by FrankOz", CENTER, 63, 48);
 
 	OLED_DisplayRefresh(); // Refresh the display to show the cleared screen
 	beep(1,50,0); // Beep once with a short sound
@@ -221,11 +222,13 @@ void usr_main(void)
 		if (butt[0].re)
 		{
 			tmr_anim = 10;
+			skroll_enabled = ON;
 			dir = SKROLL_LEFT;
 		}
 		else if (butt[2].re)
 		{
 			tmr_anim = 10;
+			skroll_enabled = ON;
 			dir = SKROLL_RIGHT;
 		}
 		
