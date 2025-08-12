@@ -45,6 +45,7 @@ typedef enum MENU_SKROLL_DIR_ {
 ms5611_data		atm_data;
 mpu_struct		imu_data = {0};
 s16						x0 = 0;
+bit						skroll_enabled = ON;
 
 /* timers */
 tmr	tmr_dsy = 0;
@@ -186,7 +187,7 @@ void usr_main(void)
 			//MPU_ReadData(&imu_data);
 		}
 
-		if (tmrTick(tmr_anim, 5))
+		if ((tmrTick(tmr_anim, 5) != 0) && (skroll_enabled == ON))
 		{
 			if (dir == SKROLL_RIGHT)
 			{
@@ -198,10 +199,10 @@ void usr_main(void)
 				}
 				else if (x == 0)
 				{
-					tmr_anim = 7000;
+					tmr_anim = (butt[2].hl == ON) ? 5 : 7000;
 				}
 			} // SKROLL_RIGHT
-			else
+			else // SKROLL_LEFT
 			{
 				x -= 16;
 				if (x <= -128)
@@ -211,9 +212,9 @@ void usr_main(void)
 				}
 				else if (x == 0)
 				{
-					tmr_anim = 7000;
+					tmr_anim = (butt[0].hl == ON) ? 5 : 7000;
 				}
-			}
+			} // SKROLL_LEFT
 		}
 
 		/* cambio menu */
@@ -233,9 +234,10 @@ void usr_main(void)
 		{
 			tmrStart(tmr_off, 3000);
 		}
-		else if (butt[1].re)
+		else if (butt[1].fe)
 		{
 			tmrStop(tmr_off);
+			skroll_enabled = (skroll_enabled == ON) ? OFF : ON;
 		}
 		else if (!tmr_off)
 		{
