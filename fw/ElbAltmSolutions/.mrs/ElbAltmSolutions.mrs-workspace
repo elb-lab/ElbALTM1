@@ -11,6 +11,10 @@
 		{
 			"name": "ElbALTM8",
 			"path": "../../ElbALTM8/ElbALTM8"
+		},
+		{
+			"name": "CH32V203RBT6",
+			"path": "../../../../ElbAdS/fw/WchAdS/CH32V203RBT6"
 		}
 	],
 	"settings": {
